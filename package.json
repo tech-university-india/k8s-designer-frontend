@@ -1,6 +1,6 @@
 {
   "name": "k8s-designer-frontend",
-  "description": "setup workflow for pushing commits to main",
+  "description": "setup workflow for pushing commits and pull requests issued to main",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
