@@ -32,6 +32,12 @@
   font-size: 120px;
 }
 
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} 
+
 .App-link {
   color: #61dafb;
 }

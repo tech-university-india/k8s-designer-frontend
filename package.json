@@ -1,6 +1,8 @@
 {
   "name": "k8s-designer-frontend",
   "version": "0.1.0",
+  "source": "src/index.js",
+  "main": "dist/main.js",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -11,12 +13,14 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build --stats",
+    "analyze": "webpack-bundle-analyzer build/bundle-stats.json",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -41,6 +45,10 @@
   "devDependencies": {
     "eslint": "^8.33.0",
     "eslint-plugin-react": "^7.32.2",
-    "tailwindcss": "^3.2.4"
+    "history": "^5.3.0",
+    "jest": "^27.5.1",
+    "parcel": "^2.8.3",
+    "tailwindcss": "^3.2.4",
+    "webpack-bundle-analyzer": "^4.7.0"
   }
 }
