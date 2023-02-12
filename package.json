@@ -1,8 +1,9 @@
 {
-  "name": "k8s-designer-frontend",
-  "description": "setup workflow for pushing commits and pull requests issued to main",
+  "name": "k8s-designer",
   "version": "1.0.0",
+  "description": "setting up github actions workflow, for merge to main",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "jest",
     "lint": "eslint --config .eslintrc.json --fix .",
@@ -10,16 +11,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tech-university-india/k8s-designer-frontend.git"
+    "url": "git+https://github.com/PreetinderSingh345/K8s-Designer.git"
   },
   "author": "Preetinder Singh",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tech-university-india/k8s-designer-frontend/issues"
+    "url": "https://github.com/PreetinderSingh345/K8s-Designer/issues"
   },
-  "homepage": "https://github.com/tech-university-india/k8s-designer-frontend#readme",
+  "homepage": "https://github.com/PreetinderSingh345/K8s-Designer#readme",
   "devDependencies": {
-    "eslint": "^8.34.0",
+    "eslint": "^8.33.0",
     "eslint-plugin-react": "^7.32.2",
     "jest": "^29.4.2"
   },
