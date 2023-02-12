@@ -1,0 +1,30 @@
+{
+  "name": "k8s-designer",
+  "version": "1.0.0",
+  "description": "setting up github actions workflow, for merge to main",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint --config .eslintrc.json --fix .",
+    "build": "echo should use react-scripts build command"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PreetinderSingh345/K8s-Designer.git"
+  },
+  "author": "Preetinder Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PreetinderSingh345/K8s-Designer/issues"
+  },
+  "homepage": "https://github.com/PreetinderSingh345/K8s-Designer#readme",
+  "devDependencies": {
+    "eslint": "^8.33.0",
+    "eslint-plugin-react": "^7.32.2",
+    "jest": "^29.4.2"
+  },
+  "dependencies": {
+    "react-scripts": "^5.0.1"
+  }
+}
