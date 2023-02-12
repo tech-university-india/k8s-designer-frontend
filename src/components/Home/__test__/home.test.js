@@ -1,24 +1,24 @@
 import { render, fireEvent } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { MemoryRouter } from 'react-router-dom';
-import About from '../About/About';
+import Home from '../Home';
 
-describe('About Page', () => {
-  it('should render home page', () => {
+describe('Home Page', () => {
+  it('should render about page', () => {
     const history = createMemoryHistory();
     const { getByTestId } = render(
       <MemoryRouter history={history}>
-        <About />
+        <Home />
       </MemoryRouter>
     );
-    fireEvent.click(getByTestId('home'));
+    fireEvent.click(getByTestId('about'));
     expect(history.location.pathname).toBe('/');
   });
   it('should render landing page', () => {
     const history = createMemoryHistory();
     const { getByTestId } = render(
       <MemoryRouter history={history}>
-        <About />
+        <Home />
       </MemoryRouter>
     );
     fireEvent.click(getByTestId('landing'));
