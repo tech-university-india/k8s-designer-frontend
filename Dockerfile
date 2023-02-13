@@ -9,11 +9,10 @@ RUN npm run build
 
 # Stage 2: Start fresh, install a static server,
 # and copy just the build artifacts from the previous stage.
-FROM node:19-alpine3.16
-
-WORKDIR /app
-RUN npm install -g serve
-COPY --from=builder /app/build ./build
-
-EXPOSE 7000
-CMD ["serve", "-s", "build", "-l", "7000"]
+FROM nginx:alpine
+WORKDIR  /usr/share/nginx/html
+RUN rm -rf ./*
+COPY --from=builder /app/build /usr/share/nginx/html
+#COPY --from=builder /app/nginx.conf /etc/nginx/conf.d/default.conf
+# Run nginx with global directives and daemon off
+ENTRYPOINT ["nginx", "-g", "daemon off;"] 
