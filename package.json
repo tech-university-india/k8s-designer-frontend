@@ -23,7 +23,8 @@
       "analyze": "webpack-bundle-analyzer build/bundle-stats.json",
       "test": "react-scripts test",
       "eject": "react-scripts eject",
-      "serve": "docker run --rm -it -p 3000:3000 react-app:v0.0.17"
+      "serve": "docker run --rm -it -p 3000:3000 react-app:v0.0.17",
+      "lint": "npx eslint --fix ."
     },
     "eslintConfig": {
       "extends": [
