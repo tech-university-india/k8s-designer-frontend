@@ -44,5 +44,9 @@
             "always"
         ],
         "react/react-in-jsx-scope": "off"
+    },
+    "globals": {
+        "localStorage": true,
+        "fetch": true
     }
 }
