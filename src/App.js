@@ -2,7 +2,7 @@ import './App.css';
 import { Route, Routes, Link } from 'react-router-dom';
 import Home from './components/Home/Home';
 import About from './components/About/About';
-import Configuration from './components/GenerateConfig/Configuration/Configuration';
+import {Configuration} from './pages';
 import { Button } from '@mui/material';
 // import Header from './components/Header/Header';
 // import Footer from './components/Footer/Footer';
