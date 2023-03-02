@@ -9,6 +9,9 @@ export default function About() {
       <div>
         <Link to='/' data-testid='landing'><Button variant='contained' onClick={() => {}}>Landing</Button></Link>
         <Link to='/home' data-testid='home'><Button variant='contained' onClick={() => {}}>Home</Button></Link>
+        {/* configuration */}
+        <Link to='/configuration' data-testid='configuration'><Button variant='contained' onClick={() => {}}>Configuration</Button></Link>
+
       </div>
     </div>
   );

@@ -2,7 +2,11 @@ import './App.css';
 import { Route, Routes, Link } from 'react-router-dom';
 import Home from './components/Home/Home';
 import About from './components/About/About';
+import Configuration from './components/GenerateConfig/Configuration/Configuration';
 import { Button } from '@mui/material';
+// import Header from './components/Header/Header';
+// import Footer from './components/Footer/Footer';
+
 function App() {
   return (
     <Routes>
@@ -13,8 +17,12 @@ function App() {
           <Link to='/about'><Button variant='contained'>About</Button></Link>
         </div>
       </div>}></Route>
+      
+      {/* <Route path='/' element={<Header />}></Route>  */}
       <Route path='/home' element={<Home />}></Route> 
       <Route path='/about' element={<About />}></Route>
+      <Route path = '/configuration' element = {<Configuration/>}></Route>
+      {/* <Route path='/' element={<Footer />}></Route>  */}
     </Routes>
   );
 }
