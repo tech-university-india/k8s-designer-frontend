@@ -8,6 +8,10 @@ import {
   ReactFlowProvider,
 } from 'reactflow';
 
+import Configuration from './components/GenerateConfig/Configuration/Configuration';
+// import Header from './components/Header/Header';
+// import Footer from './components/Footer/Footer';
+
 function App() {
   return (
     <Routes>
