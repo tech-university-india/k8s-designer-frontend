@@ -15,18 +15,6 @@ export default function configuration() {
   // const [beConfig,setBeConfig] = React.useState();
   // const [dbConfig,setDbConfig] = React.useState();
 
-  React.useEffect(() => {
-    const feConfigCache = JSON.parse(localStorage.getItem('feConfig'));
-    const userRepoCache = JSON.parse(localStorage.getItem('userRepo'));
-    if (feConfigCache) {
-      setFeConfig(feConfigCache);
-      // setService('backend');
-    }
-    if (userRepoCache) {
-      setUserRepo(userRepoCache);
-    }
-  }, []);
-
   const userRepoHandler = (userRepo)=>{
     setUserRepo(userRepo);
   };
