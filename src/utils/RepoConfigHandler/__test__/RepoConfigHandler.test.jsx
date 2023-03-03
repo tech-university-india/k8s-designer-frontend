@@ -20,20 +20,19 @@ describe('RepoConfigHandler',()=>{
     feConfigHandler: jest.fn()
   };
       
-  it('should show updated Server address when Server address textfield is updated',()=>{
+  it('should update Server address when Server address textfield is updated',()=>{
     render(<FrontendConfig userRepo = {mockProp.userRepo} userRepoHandler = {mockProp.userRepoHandler} feConfig = {mockProp.feConfig} feConfigHandler = {mockProp.feConfigHandler} />);
     expect(screen.getByDisplayValue('http://github.com')).toBeTruthy();
-    const ApiTextfield = screen.getByLabelText('Enter Server address');
-    fireEvent.change( ApiTextfield , {target : {value :'http://dockerhub.com'}});
-    expect(screen.getByDisplayValue('http://dockerhub.com')).toBeTruthy();
+    const serverTextfield = screen.getByDisplayValue('http://github.com');
+    fireEvent.change( serverTextfield , {target : {value :'http://dockerhub.com'}});
+    expect(serverTextfield.value).toEqual('http://dockerhub.com');
     
   });
-  it('should show updated Token value when Token textfield is updated',()=>{
+  it('should update Token value when Token textfield is updated',()=>{
     render(<FrontendConfig userRepo = {mockProp.userRepo} userRepoHandler = {mockProp.userRepoHandler} feConfig = {mockProp.feConfig} feConfigHandler = {mockProp.feConfigHandler} />);
     expect(screen.getByDisplayValue('abcd')).toBeTruthy();
-    const ApiTextfield = screen.getByLabelText('Enter Token');
-    fireEvent.change( ApiTextfield , {target : {value :'efg'}});
-    expect(screen.getByDisplayValue('efg')).toBeTruthy();
-    
+    const tokenTextfield = screen.getByDisplayValue('abcd');
+    fireEvent.change( tokenTextfield , {target : {value :'efg'}});
+    expect(tokenTextfield.value).toEqual('efg');
   });
 });
