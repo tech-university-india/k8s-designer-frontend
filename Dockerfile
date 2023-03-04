@@ -5,7 +5,7 @@ COPY package.json package-lock.json ./
 RUN npm install
 COPY . ./
 RUN npm run build
-
+ 
 
 # Stage 2: Start fresh, install a static server,
 # and copy just the build artifacts from the previous stage.
