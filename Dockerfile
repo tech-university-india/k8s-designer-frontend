@@ -17,4 +17,4 @@ COPY --from=builder /app/build /usr/share/nginx/html
 # Run nginx with global directives and daemon off
 ENTRYPOINT ["nginx", "-g", "daemon off;"] 
 
-RUN apk add --no-cache python3
+RUN apk add --no-cache python3 py3-pip
