@@ -1,5 +1,5 @@
 # Stage 1 (named "builder"): Production React Build
-FROM node:19-alpine3.16 AS builder
+FROM node AS builder
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
