@@ -1,8 +1,10 @@
+import React from 'react';
 import './App.css';
 import { Route, Routes, Link } from 'react-router-dom';
-import Home from './components/Home/Home';
-import About from './components/About/About';
+import {Home, About} from './components';
+import { MainDashboard } from './pages';
 import { Button } from '@mui/material';
+
 function App() {
   return (
     <Routes>
@@ -15,6 +17,7 @@ function App() {
       </div>}></Route>
       <Route path='/home' element={<Home />}></Route> 
       <Route path='/about' element={<About />}></Route>
+      <Route path='/dashboard' element={<MainDashboard />}></Route>
     </Routes>
   );
 }
