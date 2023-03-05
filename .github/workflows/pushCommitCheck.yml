@@ -3,12 +3,12 @@ name: Frontend Build and Deploy
 on:
   push:
     branches:
-      - feature/push-commit-check
+      - main
 
 env:
   REGISTRY: docker.io
   OWNER: ${{secrets.DOCKER_USERNAME}}
-  IMAGE_NAME: k8s-designer-backend
+  IMAGE_NAME: k8s-designer-frontend
   TAG: $(cat VERSION.txt)-$(echo ${{github.sha}} | cut -c1-7)
 
 jobs:
