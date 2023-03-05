@@ -5,7 +5,7 @@
   justify-content: space-;
   border: 1px solid black;
   height: 500px;
-  width: 20%;
+  width: 30%;
 }
 
 .heading {
@@ -34,4 +34,7 @@ hr {
   width: 100px;
   border: 1px solid black;
   margin: 20px 0;
+  border-radius: 20px;
+  font-weight: bold;
+  box-shadow: 2px 2px 2px gray;
 }
