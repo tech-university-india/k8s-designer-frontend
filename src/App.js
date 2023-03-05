@@ -4,6 +4,9 @@ import { Route, Routes, Link } from 'react-router-dom';
 import {Home, About} from './components';
 import { MainDashboard } from './pages';
 import { Button } from '@mui/material';
+import {
+  ReactFlowProvider,
+} from 'reactflow';
 
 function App() {
   return (
@@ -17,7 +20,7 @@ function App() {
       </div>}></Route>
       <Route path='/home' element={<Home />}></Route> 
       <Route path='/about' element={<About />}></Route>
-      <Route path='/dashboard' element={<MainDashboard />}></Route>
+      <Route path='/dashboard' element={<ReactFlowProvider><MainDashboard /></ReactFlowProvider>}></Route>
     </Routes>
   );
 }

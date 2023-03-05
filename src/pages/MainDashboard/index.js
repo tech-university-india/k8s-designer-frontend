@@ -1,78 +1,71 @@
-import React, { useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import './MainDashboard.css';
-import { Header } from '../../components';
-import SimpleFloatingEdge from './SimpleFloatingEdge';
+import { Header, MicroServices } from '../../components';
 import ReactFlow, {
   addEdge,
-  Background,
   useNodesState,
   useEdgesState,
-  MarkerType,
-  ConnectionMode,
+  Background,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
-import CustomNode from './CustomNode';
-
-const nodeTypes = {
-  custom: CustomNode,
-};
-
-const edgeTypes = {
-  floating: SimpleFloatingEdge,
-};
-
 const MainDashboard = () => {
-  const [microservice, , onMicroserviceChange] = useNodesState([
-    { 
-      id: '1',
-      label: 'frontend', 
-      position: { x: 100, y: 50 },
-      data: { label: 'FRONTEND' },
-      type: 'custom',
-    }, 
-    { 
-      id: '2',
-      label: 'backend', 
-      position: { x: 100, y: 200 },
-      data: { label: 'BACKEND' },
-      type: 'custom',
-    }, 
-    { 
-      id: '3',
-      label: 'database', 
-      position: { x: 100, y: 350 },
-      data: { label: 'DATABASE' },
-      type: 'custom',
-    }
-  ]); 
-  // const [ dashboard, setDashboard, onDashboardChange ] = useNodesState([]);
-
+  const reactFlowWrapper = useRef(null);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-
-  const onConnect = useCallback(
-    (params) =>
-      setEdges((eds) =>
-        addEdge({ ...params, type: 'floating' }, eds)
-      ),
-    []
-  );
+  const [reactFlowInstance, setReactFlowInstance] = useState(null);
   
+  console.log(nodes);
+
+  const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
+
+  const onDragOver = useCallback((event) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+  }, []);
+
+  const onDrop = useCallback(
+    (event) => {
+      event.preventDefault();
+
+      const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
+      const type = event.dataTransfer.getData('application/reactflow');
+
+      if (typeof type === 'undefined' || !type) {
+        return;
+      }
+
+      const position = reactFlowInstance.project({
+        x: event.clientX - reactFlowBounds.left,
+        y: event.clientY - reactFlowBounds.top,
+      });
+      const newNode = {
+        id: uuidv4(),
+        type,
+        position,
+        data: { label: type.toUpperCase() },
+      };
+      setNodes((nds) => {return  [...nds, newNode];});
+    },
+    [reactFlowInstance]
+  );
   return (
     <div className='maindashboard'>
       <Header />
-      <div className='dashboard_service'>
+      <div className='dashboard_service' ref={reactFlowWrapper}>
+        <MicroServices />
         <ReactFlow
-          nodes={microservice}
+          nodes={nodes}
           edges={edges}
-          onNodesChange={onMicroserviceChange}
+          onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
-          nodeTypes={nodeTypes}
-          edgeTypes={edgeTypes}
+          onInit={setReactFlowInstance}
+          onDrop={onDrop}
+          onDragOver={onDragOver}
           fitView
           fitViewOptions={ { padding: 4 } }
-          connectionMode={ConnectionMode.Loose}
         >
           <Background color="#aaa" gap={16} />
         </ReactFlow>
