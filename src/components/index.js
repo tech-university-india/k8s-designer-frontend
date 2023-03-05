@@ -6,5 +6,7 @@ import About from './About';
 import Home from './Home';
 import MicroServices from './MicroServices';
 import Dashboard from './Dashboard';
+export {default as Configuration } from './Configuration';
+export{default as CustomTextField} from './CustomTextField';
 
 export { Header, Footer, About, Home, MicroServices, Dashboard };
