@@ -3,3 +3,4 @@ node_modules
 .eslintrc.json
 README.md
 Dockerfile
+.env_template
