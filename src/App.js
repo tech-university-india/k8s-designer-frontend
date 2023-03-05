@@ -2,7 +2,7 @@ import './App.css';
 import { Route, Routes, Link } from 'react-router-dom';
 import Home from './components/Home/Home';
 import About from './components/About/About';
-import {Configuration} from './pages';
+import {ConfigurationPage} from './pages';
 import { Button } from '@mui/material';
 // import Header from './components/Header/Header';
 // import Footer from './components/Footer/Footer';
@@ -21,7 +21,7 @@ function App() {
       {/* <Route path='/' element={<Header />}></Route>  */}
       <Route path='/home' element={<Home />}></Route> 
       <Route path='/about' element={<About />}></Route>
-      <Route path = '/configuration' element = {<Configuration/>}></Route>
+      <Route path = '/configuration' element = {<ConfigurationPage/>}></Route>
       {/* <Route path='/' element={<Footer />}></Route>  */}
     </Routes>
   );
