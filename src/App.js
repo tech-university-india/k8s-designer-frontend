@@ -29,6 +29,7 @@ function App() {
       {/* <Route path='/' element={<Footer />}></Route>  */}
       <Route path='/dashboard' element={<ReactFlowProvider><MainDashboard /></ReactFlowProvider>}></Route>
       {/* <Route path='/' element={<Footer />}></Route>  */}
+      <Route path='/dashboard' element={<ReactFlowProvider><MainDashboard /></ReactFlowProvider>}></Route>
     </Routes>
   );
 }
