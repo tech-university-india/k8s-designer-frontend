@@ -1,9 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import MainDashboard from './../index';
-import {
-  ReactFlowProvider,
-} from 'reactflow';
 
 import * as ResizeObserverModule from 'resize-observer-polyfill';
 
