@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MicroServices should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="microservices"
+  >
+    <div>
+      <p
+        class="heading"
+      >
+        MicroServices
+      </p>
+      <hr />
+    </div>
+    <div
+      class="services"
+    >
+      <div
+        class="service"
+        draggable="true"
+      >
+        <p>
+          FRONTEND
+        </p>
+      </div>
+      <div
+        class="service"
+        draggable="true"
+      >
+        <p>
+          BACKEND
+        </p>
+      </div>
+      <div
+        class="service"
+        draggable="true"
+      >
+        <p>
+          DATABASE
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
