@@ -9,16 +9,19 @@ import ReactFlow, {
   Background,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
+import { CustomNode } from '../../utils';
+
+const nodeTypes = {
+  microservice: CustomNode,
+};
 
 const MainDashboard = () => {
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
-  
-  console.log(nodes);
 
-  const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
+  const onConnect = useCallback((params) => setEdges((eds) => addEdge({ ...params, type: 'microserice' }, eds)), []);
 
   const onDragOver = useCallback((event) => {
     event.preventDefault();
@@ -31,6 +34,10 @@ const MainDashboard = () => {
 
       const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
       const type = event.dataTransfer.getData('application/reactflow');
+      const name = event.dataTransfer.getData('nameOfNode');
+
+      console.log(type);
+      console.log(name);
 
       if (typeof type === 'undefined' || !type) {
         return;
@@ -44,7 +51,7 @@ const MainDashboard = () => {
         id: uuidv4(),
         type,
         position,
-        data: { label: type.toUpperCase() },
+        data: { label: name.toUpperCase() },
       };
       setNodes((nds) => {return  [...nds, newNode];});
     },
@@ -61,11 +68,13 @@ const MainDashboard = () => {
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
+          nodeTypes={nodeTypes}
           onInit={setReactFlowInstance}
           onDrop={onDrop}
           onDragOver={onDragOver}
           fitView
           fitViewOptions={ { padding: 4 } }
+          connectionMode="loose"
         >
           <Background color="#aaa" gap={16} />
         </ReactFlow>
