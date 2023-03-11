@@ -1,11 +1,16 @@
+import React from 'react';
 import './App.css';
 import { Route, Routes, Link } from 'react-router-dom';
-import Home from './components/Home/Home';
-import About from './components/About/About';
 import {ConfigurationPage} from './pages';
 import { Button } from '@mui/material';
 // import Header from './components/Header/Header';
 // import Footer from './components/Footer/Footer';
+import {Home, About} from './components';
+import { MainDashboard } from './pages';
+import { Button } from '@mui/material';
+import {
+  ReactFlowProvider,
+} from 'reactflow';
 
 function App() {
   return (
@@ -23,6 +28,7 @@ function App() {
       <Route path='/about' element={<About />}></Route>
       <Route path = '/configuration' element = {<ConfigurationPage/>}></Route>
       {/* <Route path='/' element={<Footer />}></Route>  */}
+      <Route path='/dashboard' element={<ReactFlowProvider><MainDashboard /></ReactFlowProvider>}></Route>
     </Routes>
   );
 }
