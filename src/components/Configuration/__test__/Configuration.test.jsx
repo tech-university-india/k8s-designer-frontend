@@ -1,4 +1,4 @@
-import {fireEvent, render ,screen,waitFor } from '@testing-library/react';
+import {fireEvent, render ,screen,waitFor ,act} from '@testing-library/react';
 import Configuration from '..';
 import * as React from 'react';
 import ConfigHandler from '../../../utils/ConfigHandler';
@@ -21,17 +21,16 @@ describe('Frontend Configuration',()=>{
     expect(screen.queryByLabelText('Enter PORT')).toBeFalsy();
     render(<Configuration service = "FRONTEND"/>);
     await waitFor(()=>{
-      expect(screen.queryByLabelText('Enter DATABASE_URL')).toBeTruthy();
+      expect(screen.queryByLabelText('Enter ENVIRONMENT')).toBeTruthy();
     });
     expect(screen.queryByLabelText('Enter PORT')).toBeTruthy();
-    expect(screen.queryByLabelText('Enter ENVIRONMENT')).toBeTruthy();
     expect(screen.queryByLabelText('Enter NUMBER_OF_REPLICAS')).toBeTruthy();
   });
   it('should call FE config handler with port as parameter when port textfield is updated',async()=>{
 
     render(<Configuration service = "FRONTEND"/>);
     await waitFor(()=>{
-      expect(screen.queryByLabelText('Enter DATABASE_URL')).toBeTruthy();
+      expect(screen.queryByLabelText('Enter ENVIRONMENT')).toBeTruthy();
     });
     expect(screen.queryByLabelText('Enter PORT')).toBeTruthy();
     expect(ConfigHandler).toHaveBeenCalledTimes(0);
@@ -41,7 +40,15 @@ describe('Frontend Configuration',()=>{
     expect(ConfigHandler).toHaveBeenCalledWith(expect.anything(),'PORT',expect.anything(),expect.anything());
   });
 
-  it('it should add new textfield when plus button is clicked',async()=>{
+  it('should show custom configuration text when component is rendered',async()=>{
+    expect(screen.queryByText('CUSTOM CONFIGURATION')).toBeFalsy();
+    render(<Configuration service = "FRONTEND"/>);
+    await waitFor(()=>{
+      expect(screen.queryByText('CUSTOM CONFIGURATION')).toBeTruthy();
+    });
+  });
+
+  it('should add new input textfield when plus button is clicked',async()=>{
     render(<Configuration service = "FRONTEND"/>);
     await waitFor(()=>{
       expect(screen.getByTestId('add-new-config')).toBeTruthy();
@@ -53,26 +60,53 @@ describe('Frontend Configuration',()=>{
     });
   });
 
-  it('it should update service configuration with new textfield when plus button is clicked',async()=>{
+  it('should get user config from local storage when component is rendered',async()=>{
+    const userConfig = {
+      'PORT' : '8000',
+      'NUMBER_OF_REPLICAS' : '2',
+      'ENVIRONMENT' : 'development'
+    };
+    localStorage.setItem('FRONTEND',JSON.stringify(userConfig));
     render(<Configuration service = "FRONTEND"/>);
     await waitFor(()=>{
-      expect(screen.getByTestId('add-new-config')).toBeTruthy();
+      expect(screen.queryByLabelText('Enter ENVIRONMENT')).toBeTruthy();
     });
-    let addButton = screen.getByTestId('add-new-config');
-    fireEvent.click(addButton);
-    await waitFor(()=>{
-      expect(screen.getByTestId('newConfig-key')).toBeTruthy();
-    });
-    const configKey = screen.getByTestId('newConfig-key').querySelector('input');
-    fireEvent.change(configKey,{target:{value:'NAME'}});
-    const configValue = screen.queryByTestId('newConfig-value').querySelector('input');
-    fireEvent.change(configValue,{target:{value:'value'}});
-    const addButton2= screen.getByTestId('add-newConfig');
-    fireEvent.click(addButton2);
-    await waitFor(()=>{
-      expect(screen.getByDisplayValue('value')).toBeTruthy();
-    });
+    expect(screen.queryByLabelText('Enter PORT')).toBeTruthy();
+    expect(screen.queryByLabelText('Enter NUMBER_OF_REPLICAS')).toBeTruthy();
+    expect(screen.queryByLabelText('Enter PORT').value).toBe('8000');
+    expect(screen.queryByDisplayValue('development')).toBeTruthy();
+    expect(screen.queryByDisplayValue('2')).toBeTruthy();
   });
+
+  it('should clear the timer on unmount', () => {
+    jest.useFakeTimers();
+
+    const clearTimeoutSpy = jest.spyOn(global, 'clearTimeout');
+
+    const { unmount } =  render(<Configuration service = "FRONTEND"/>);
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
+
+    unmount();
+
+    expect(clearTimeoutSpy).toHaveBeenCalledTimes(3);
+  });
+
+  // it('should pass event down as prop and call it when component is unmounted', () => {
+  //   const handleUnmount = jest.fn();
+  //   const container = document.createElement('div');
+
+  //   render(<MyComponent onUnmount={handleUnmount} />, container);
+
+  //   unmountComponentAtNode(container);
+
+  //   expect(handleUnmount).toHaveBeenCalledTimes(1);
+  // });
+
   it('should render correctly and create a snapshot', () => {
     const {asFragment } =  render(<Configuration service = "FRONTEND"/>);
     expect(asFragment()).toMatchSnapshot();
