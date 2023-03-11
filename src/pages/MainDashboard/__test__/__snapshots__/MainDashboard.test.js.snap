@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainDashboard should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="maindashboard"
+  >
+    <div
+      class="header"
+    >
+      <div
+        class="logo"
+      >
+        K8D
+      </div>
+      <div
+        class="user"
+      >
+        <div
+          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2s90m6-MuiAvatar-root"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+            data-testid="PersonIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+            />
+          </svg>
+        </div>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          type="button"
+        >
+          Logout
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="dashboard_service"
+    >
+      <div
+        class="microservices"
+      >
+        <div>
+          <p
+            class="heading"
+          >
+            MicroServices
+          </p>
+          <hr />
+        </div>
+        <div
+          class="services"
+        >
+          <div
+            class="service"
+            draggable="true"
+          >
+            <p>
+              FRONTEND
+            </p>
+          </div>
+          <div
+            class="service"
+            draggable="true"
+          >
+            <p>
+              BACKEND
+            </p>
+          </div>
+          <div
+            class="service"
+            draggable="true"
+          >
+            <p>
+              DATABASE
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="react-flow"
+        data-testid="rf__wrapper"
+        style="width: 100%; height: 100%; overflow: hidden; position: relative; z-index: 0;"
+      >
+        <div
+          class="react-flow__renderer"
+          style="position: absolute; width: 100%; height: 100%; top: 0px; left: 0px;"
+        >
+          <div
+            class="react-flow__pane"
+            style="position: absolute; width: 100%; height: 100%; top: 0px; left: 0px;"
+          >
+            <div
+              class="react-flow__viewport react-flow__container"
+              style="transform: translate(0px,0px) scale(1);"
+            >
+              <svg
+                class="react-flow__edges react-flow__container"
+                height="500"
+                style="z-index: 0;"
+                width="500"
+              >
+                <defs />
+                <g />
+              </svg>
+              <div
+                class="react-flow__edgelabel-renderer"
+              />
+              <div
+                class="react-flow__nodes"
+                style="position: absolute; width: 100%; height: 100%; top: 0px; left: 0px;"
+              />
+            </div>
+          </div>
+        </div>
+        <svg
+          class="react-flow__background"
+          style="position: absolute; width: 100%; height: 100%; top: 0px; left: 0px;"
+        >
+          <pattern
+            height="16"
+            id="pattern-1"
+            patternTransform="translate(-0.5,-0.5)"
+            patternUnits="userSpaceOnUse"
+            width="16"
+            x="0"
+            y="0"
+          >
+            <circle
+              cx="0.5"
+              cy="0.5"
+              fill="#aaa"
+              r="0.5"
+            />
+          </pattern>
+          <rect
+            fill="url(#pattern-1)"
+            height="100%"
+            width="100%"
+            x="0"
+            y="0"
+          />
+        </svg>
+        <div
+          class="react-flow__panel react-flow__attribution bottom right"
+          data-message="Please only hide this attribution when you are subscribed to React Flow Pro: https://pro.reactflow.dev"
+          style="pointer-events: all;"
+        >
+          <a
+            aria-label="React Flow attribution"
+            href="https://reactflow.dev"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            React Flow
+          </a>
+        </div>
+        <div
+          id="react-flow__node-desc-1"
+          style="display: none;"
+        >
+          Press enter or space to select a node.You can then use the arrow keys to move the node around. Press delete to remove it and escape to cancel. 
+        </div>
+        <div
+          id="react-flow__edge-desc-1"
+          style="display: none;"
+        >
+          Press enter or space to select an edge. You can then press delete to remove it or escape to cancel.
+        </div>
+        <div
+          aria-atomic="true"
+          aria-live="assertive"
+          id="react-flow__aria-live-1"
+          style="position: absolute; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(100%);"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
