@@ -7,37 +7,40 @@ import './Configuration.css';
 import PropTypes from 'prop-types';
 import ConfigHandler from '../../utils/ConfigHandler';
 import {CustomTextField} from '../index';
-import { REPOSITORY , getConfiguration } from '../../utils/makeRequest';
-
-
+import { getConfiguration } from '../../utils/makeRequest';
 export default function Configuration({service}){
 
-  
-
   const [userConfig , setUserConfig] = React.useState();
-  const [userRepoConfig , setUserRepoConfig] = React.useState();
-
   const [newTextField, setNewTextField] = React.useState([]);
 
   React.useEffect(() => {
-    setUserRepoConfig(REPOSITORY);
-    setUserConfig(getConfiguration(service));
+    const configCache =  localStorage.getItem(service);
+    if(configCache)
+    {
+      setUserConfig(JSON.parse(configCache));
+    }
+    else{
+      setUserConfig(getConfiguration(service));
+    }
+    return () => {
+      setUserConfig(null);
+      setNewTextField([]);
+    };
   },[service]);
 
-  // React.useEffect(() => {
-  //   return()=>{
-
-  //     // updateConfiguration(service,userRepoConfig);
-  //     // updateConfiguration(userRepoConfig);
-  //   };
-  // },[userConfig,userRepoConfig]);
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      localStorage.setItem(service, JSON.stringify(userConfig));
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [userConfig]);
 
   const handleUserConfig = (newUserConfig)=>{
     setUserConfig(newUserConfig);
   };
    
   const onAddBtnClick = () => {
-    setNewTextField((<CustomTextField userConfig = {userConfig} handleUserConfig={handleUserConfig} setNewTextField = {setNewTextField}/>));
+    setNewTextField(newTextField.concat(<CustomTextField userConfig = {userConfig} handleUserConfig={handleUserConfig} setNewTextField = {setNewTextField}/>));
   };
 
   return userConfig ?(
@@ -59,14 +62,12 @@ export default function Configuration({service}){
           {Object.keys(userConfig).map((configuration,index)=>(
             <TextField id="outlined-basic" label= {`Enter ${configuration}`} value = {userConfig[configuration] || ''} key={index} onChange = {(event)=>ConfigHandler(event,configuration,userConfig,setUserConfig)} variant="outlined" />
           ))}
+          <div className='add-textfield-container'>
+            <p>CUSTOM CONFIGURATION</p>
+            <AddCircleOutlineIcon data-testid="add-new-config" color='blue' onClick={onAddBtnClick}/>
+          </div>
           {newTextField}
-          {Object.keys(userRepoConfig).map((configuration,index)=>(
-            <TextField id="outlined-basic" label= {`Enter ${configuration}`} key={index}  value ={userRepoConfig[configuration]||''} onChange = {(event)=>ConfigHandler(event,configuration,userRepoConfig,setUserRepoConfig)} variant="outlined" />
-          ))}
         </Box>
-        {newTextField.length===0 && <div className='add-textfield-container'>
-          <AddCircleOutlineIcon data-testid="add-new-config" color='blue' onClick={onAddBtnClick}/>
-        </div>}
         <div className='generate-btn-container'>
           <Button className='config-btn-color'>GENERATE NOW</Button>
         </div>
@@ -80,9 +81,5 @@ export default function Configuration({service}){
 }
 
 Configuration.propTypes = {
-  service : PropTypes.string,
-  userRepo:  PropTypes.object,
-  userRepoHandler: PropTypes.func,
-  userConfige:  PropTypes.object,
-  userConfigHandler: PropTypes.func
+  service : PropTypes.string
 };
