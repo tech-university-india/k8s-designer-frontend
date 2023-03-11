@@ -10,5 +10,3 @@ export {default as Configuration } from './Configuration';
 export{default as CustomTextField} from './CustomTextField';
 
 export { Header, Footer, About, Home, MicroServices, Dashboard };
-export {default as Configuration } from './Configuration';
-export{default as CustomTextField} from './CustomTextField';
