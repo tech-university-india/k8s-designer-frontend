@@ -8,5 +8,3 @@ import MicroServices from './MicroServices';
 import Dashboard from './Dashboard';
 
 export { Header, Footer, About, Home, MicroServices, Dashboard };
-export {default as Configuration } from './Configuration';
-export{default as CustomTextField} from './CustomTextField';
