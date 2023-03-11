@@ -22,15 +22,8 @@ function App() {
       {/* <Route path='/' element={<Header />}></Route>  */}
       <Route path='/home' element={<Home />}></Route> 
       <Route path='/about' element={<About />}></Route>
-      <Route path = '/configuration' element = {<ConfigurationPage/>}></Route>
-      {/* <Route path='/' element={<Footer />}></Route>  */}
-      <Route path='/dashboard' element={<ReactFlowProvider><MainDashboard /></ReactFlowProvider>}></Route>
-      <Route path='/dashboard' element={<ReactFlowProvider><MainDashboard /></ReactFlowProvider>}></Route>
-      <Route path = '/configuration' element = {<ConfigurationPage/>}></Route>
-      {/* <Route path='/' element={<Footer />}></Route>  */}
       <Route path='/dashboard' element={<ReactFlowProvider><MainDashboard /></ReactFlowProvider>}></Route>
       {/* <Route path='/' element={<Footer />}></Route>  */}
-      <Route path='/dashboard' element={<ReactFlowProvider><MainDashboard /></ReactFlowProvider>}></Route>
       <Route path = '/configuration' element = {<ConfigurationPage/>}></Route>
       {/* <Route path='/' element={<Footer />}></Route>  */}
     </Routes>
