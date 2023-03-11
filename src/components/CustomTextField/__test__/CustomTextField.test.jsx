@@ -20,78 +20,31 @@ describe('Frontend Configuration',()=>{
     render(<CustomTextField userConfig = {mock.userConfig} handleUserConfig={mock.handleUserConfig} setNewTextField = {mock.setNewTextField}/>);
     expect(screen.queryByTestId('newConfig-key')).toBeTruthy();
     expect(screen.queryByTestId('newConfig-key').value).toEqual(undefined);
-    
   });
-   
-  it('should show config-value textfield when key-textfield has some value',()=>{
+
+  it('should update newConfigKey when textfield is updated',()=>{
     expect(screen.queryByTestId('newConfig-key')).toBeFalsy();
     render(<CustomTextField userConfig = {mock.userConfig} handleUserConfig={mock.handleUserConfig} setNewTextField = {mock.setNewTextField}/>);
     expect(screen.queryByTestId('newConfig-key')).toBeTruthy();
-    expect(screen.queryByTestId('newConfig-value')).toBeFalsy();
+    expect(screen.queryByLabelText('Enter Key')).toBeTruthy();
     const configKey = screen.getByTestId('newConfig-key').querySelector('input');
     fireEvent.change(configKey,{target:{value:'name'}});
-    expect(screen.queryByTestId('newConfig-value')).toBeTruthy();
-  });
-  
-  it('should disable config-value textfield when key-textfield is null',()=>{
-    expect(screen.queryByTestId('newConfig-key')).toBeFalsy();
-    render(<CustomTextField userConfig = {mock.userConfig} handleUserConfig={mock.handleUserConfig} setNewTextField = {mock.setNewTextField}/>);
-    expect(screen.queryByTestId('newConfig-key')).toBeTruthy();
-    expect(screen.queryByTestId('newConfig-value')).toBeFalsy();
-    const configKey = screen.getByTestId('newConfig-key').querySelector('input');
-    fireEvent.change(configKey,{target:{value:'name'}});
-    expect(screen.queryByTestId('newConfig-value')).toBeTruthy();
-    fireEvent.change(configKey,{target:{value:null}});
-    expect(screen.queryByTestId('newConfig-value')).toBeFalsy();
+    expect(screen.queryByDisplayValue('name')).toBeTruthy();
   });
 
   it('should show add config button when value-textfield has some value',()=>{
+    expect(screen.queryByTestId('newConfig-value')).toBeFalsy();
     render(<CustomTextField userConfig = {mock.userConfig} handleUserConfig={mock.handleUserConfig} setNewTextField = {mock.setNewTextField}/>);
+    expect(screen.queryByLabelText('Enter Value')).toBeTruthy();
     const configKey = screen.getByTestId('newConfig-key').querySelector('input');
     fireEvent.change(configKey,{target:{value:'name'}});
     expect(screen.queryByTestId('newConfig-value')).toBeTruthy();
     const configValue = screen.queryByTestId('newConfig-value').querySelector('input');
-    fireEvent.change(configValue,{target:{value:'value'}});
-    expect(screen.getByTestId('add-newConfig')).toBeTruthy();
+    fireEvent.change(configValue,{target:{value:'2020'}});
+    expect(screen.queryByDisplayValue('2020')).toBeTruthy();
+
   });
 
-  it('should disable add config button when value-textfield is null',()=>{
-    render(<CustomTextField userConfig = {mock.userConfig} handleUserConfig={mock.handleUserConfig} setNewTextField = {mock.setNewTextField}/>);
-    const configKey = screen.getByTestId('newConfig-key').querySelector('input');
-    fireEvent.change(configKey,{target:{value:'name'}});
-    expect(screen.queryByTestId('newConfig-value')).toBeTruthy();
-    const configValue = screen.queryByTestId('newConfig-value').querySelector('input');
-    fireEvent.change(configValue,{target:{value:'value'}});
-    expect(screen.getByTestId('add-newConfig')).toBeTruthy();
-    fireEvent.change(configValue,{target:{value:null}});
-    expect(screen.queryByTestId('add-newConfig')).toBeFalsy();
-  });
-
-  it('should disable add config button when value-textfield is null',()=>{
-    render(<CustomTextField userConfig = {mock.userConfig} handleUserConfig={mock.handleUserConfig} setNewTextField = {mock.setNewTextField}/>);
-    const configKey = screen.getByTestId('newConfig-key').querySelector('input');
-    fireEvent.change(configKey,{target:{value:'name'}});
-    expect(screen.queryByTestId('newConfig-value')).toBeTruthy();
-    const configValue = screen.queryByTestId('newConfig-value').querySelector('input');
-    fireEvent.change(configValue,{target:{value:'value'}});
-    expect(screen.getByTestId('add-newConfig')).toBeTruthy();
-    fireEvent.change(configValue,{target:{value:null}});
-    expect(screen.queryByTestId('add-newConfig')).toBeFalsy();
-  });
-
-  it('should update userConfig when add config button is clicked',()=>{
-    render(<CustomTextField userConfig = {mock.userConfig} handleUserConfig={mock.handleUserConfig} setNewTextField = {mock.setNewTextField}/>);
-    const configKey = screen.getByTestId('newConfig-key').querySelector('input');
-    fireEvent.change(configKey,{target:{value:'NAME'}});
-    const configValue = screen.queryByTestId('newConfig-value').querySelector('input');
-    fireEvent.change(configValue,{target:{value:'value'}});
-    const addButton= screen.getByTestId('add-newConfig');
-    expect(mock.handleUserConfig).toHaveBeenCalledTimes(0);
-    expect(mock.setNewTextField).toHaveBeenCalledTimes(0);
-    fireEvent.click(addButton);
-    expect(mock.handleUserConfig).toHaveBeenCalledTimes(1);
-    expect(mock.setNewTextField).toHaveBeenCalledTimes(1);
-  });
 
   it('should render correctly and create a snapshot', () => {
     const {asFragment } =  render(<CustomTextField userConfig = {mock.userConfig} handleUserConfig={mock.handleUserConfig} setNewTextField = {mock.setNewTextField}/>);

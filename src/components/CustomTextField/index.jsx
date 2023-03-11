@@ -2,7 +2,6 @@ import * as React from 'react';
 import './CustomTextField.css';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import PropTypes from 'prop-types';
 
 export default function CustomTextField({userConfig,handleUserConfig,setNewTextField}){
@@ -10,11 +9,19 @@ export default function CustomTextField({userConfig,handleUserConfig,setNewTextF
   const [newConfigKey , setNewConfigKey] = React.useState();
   const [newConfigValue , setNewConfigValue] = React.useState();
 
-  const handleAddConfig = ()=>{
-    userConfig = {...userConfig,[newConfigKey]:newConfigValue};
-    setNewTextField([]);
-    handleUserConfig(userConfig);
-  };
+  React.useEffect(() => {
+    return ()=>{
+      console.log('new config added');
+
+      if(newConfigKey && newConfigValue)
+      {
+        console.log('new config added');
+        userConfig = {...userConfig,[newConfigKey]:newConfigValue};
+        handleUserConfig(userConfig);
+        setNewTextField([]);
+      }
+    };
+  }, []);
 
   return(
     <>
@@ -30,12 +37,9 @@ export default function CustomTextField({userConfig,handleUserConfig,setNewTextF
           { fontFamily :  'Open Sans'}
         }
       >
-        <TextField id="outlined-basic" variant="outlined" data-testid = "newConfig-key" value={newConfigKey} onChange={(event)=>{setNewConfigKey(event.target.value);}}/>
-        {newConfigKey ? (<TextField id="outlined-basic" data-testid = "newConfig-value" value={newConfigValue} variant="outlined" onChange={(event)=>{setNewConfigValue(event.target.value);}}/>):null}
+        <TextField id="outlined-basic" label = "Enter Key" variant="outlined" data-testid = "newConfig-key" value={newConfigKey} onChange={(event)=>{setNewConfigKey(event.target.value);}}/>
+        <TextField id="outlined-basic" label = "Enter Value" data-testid = "newConfig-value" value={newConfigValue} variant="outlined" onChange={(event)=>{setNewConfigValue(event.target.value);}}/>
       </Box>
-      { newConfigValue && <div className='add-textfield-btn'>
-        <AddCircleOutlineIcon data-testid = "add-newConfig" color='blue' onClick={handleAddConfig}/>
-      </div>}
     </>
   );
 }
