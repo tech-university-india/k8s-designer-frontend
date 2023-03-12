@@ -4,24 +4,18 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
 
-export default function CustomTextField({userConfig,handleUserConfig,setNewTextField}){
+export default function CustomTextField({Key,customConfig,handleCustomConfig}){
 
-  const [newConfigKey , setNewConfigKey] = React.useState();
-  const [newConfigValue , setNewConfigValue] = React.useState();
+  const [newConfigKey , setNewConfigKey] = React.useState(customConfig[0]||'');
+  const [newConfigValue , setNewConfigValue] = React.useState(customConfig[1]||'');
 
   React.useEffect(() => {
-    return ()=>{
-      console.log('new config added');
-
-      if(newConfigKey && newConfigValue)
-      {
-        console.log('new config added');
-        userConfig = {...userConfig,[newConfigKey]:newConfigValue};
-        handleUserConfig(userConfig);
-        setNewTextField([]);
-      }
-    };
-  }, []);
+    const timer = setTimeout(() => {
+      customConfig = [newConfigKey,newConfigValue];
+      handleCustomConfig(Key,customConfig);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [newConfigKey,newConfigValue]);
 
   return(
     <>
@@ -45,7 +39,7 @@ export default function CustomTextField({userConfig,handleUserConfig,setNewTextF
 }
 
 CustomTextField.propTypes = {
-  userConfig: PropTypes.object,
-  handleUserConfig: PropTypes.func,
-  setNewTextField: PropTypes.func
+  Key: PropTypes.string,
+  customConfig: PropTypes.array,
+  handleCustomConfig: PropTypes.func,
 };
