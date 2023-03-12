@@ -14,8 +14,6 @@ describe('Frontend Configuration',()=>{
     render(<Configuration service = "FRONTEND"/>);
     expect(screen.queryByText('FRONTEND MICROSERVICES')).toBeTruthy();
   });
-   
-  
 
   it('should render all configuration fields when component is rendered',async()=>{
     expect(screen.queryByLabelText('Enter PORT')).toBeFalsy();
@@ -61,12 +59,15 @@ describe('Frontend Configuration',()=>{
   });
 
   it('should get user config from local storage when component is rendered',async()=>{
-    const userConfig = {
-      'PORT' : '8000',
-      'NUMBER_OF_REPLICAS' : '2',
-      'ENVIRONMENT' : 'development'
+    const userConfigCache  = {
+      'userConfig':{
+        'PORT' : '8000',
+        'NUMBER_OF_REPLICAS' : '2',
+        'ENVIRONMENT' : 'development'
+      },
+      'customConfig':{}
     };
-    localStorage.setItem('FRONTEND',JSON.stringify(userConfig));
+    localStorage.setItem('FRONTEND',JSON.stringify(userConfigCache));
     render(<Configuration service = "FRONTEND"/>);
     await waitFor(()=>{
       expect(screen.queryByLabelText('Enter ENVIRONMENT')).toBeTruthy();
@@ -80,33 +81,37 @@ describe('Frontend Configuration',()=>{
 
   it('should clear the timer on unmount', () => {
     jest.useFakeTimers();
-
     const clearTimeoutSpy = jest.spyOn(global, 'clearTimeout');
-
     const { unmount } =  render(<Configuration service = "FRONTEND"/>);
-
     act(() => {
       jest.runAllTimers();
     });
-
     expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
-
     unmount();
-
-    expect(clearTimeoutSpy).toHaveBeenCalledTimes(3);
+    expect(clearTimeoutSpy).toHaveBeenCalledTimes(4);
   });
 
-  // it('should pass event down as prop and call it when component is unmounted', () => {
-  //   const handleUnmount = jest.fn();
-  //   const container = document.createElement('div');
-
-  //   render(<MyComponent onUnmount={handleUnmount} />, container);
-
-  //   unmountComponentAtNode(container);
-
-  //   expect(handleUnmount).toHaveBeenCalledTimes(1);
-  // });
-
+  it('should reset all configuration fields when reset button is clicked',async()=>{
+    const userConfigCache  = {
+      'userConfig':{
+        'PORT' : '8000',
+        'NUMBER_OF_REPLICAS' : '2',
+        'ENVIRONMENT' : 'development'
+      },
+      'customConfig':{}
+    };
+    localStorage.setItem('FRONTEND',JSON.stringify(userConfigCache));
+    render(<Configuration service = "FRONTEND"/>);
+    await waitFor(()=>{
+      expect(screen.queryByLabelText('Enter ENVIRONMENT')).toBeTruthy();
+    });
+    expect(screen.queryByTestId('reset-button')).toBeTruthy();
+    const resetButton = screen.getByTestId('reset-button');
+    fireEvent.click(resetButton);
+    expect(screen.queryByLabelText('Enter PORT').value).toBe('');
+    expect(screen.queryByDisplayValue('development')).toBeFalsy();
+    expect(screen.queryByDisplayValue('2')).toBeFalsy();
+  });
   it('should render correctly and create a snapshot', () => {
     const {asFragment } =  render(<Configuration service = "FRONTEND"/>);
     expect(asFragment()).toMatchSnapshot();
