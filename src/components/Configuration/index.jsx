@@ -11,36 +11,47 @@ import { getConfiguration } from '../../utils/makeRequest';
 export default function Configuration({service}){
 
   const [userConfig , setUserConfig] = React.useState();
-  const [newTextField, setNewTextField] = React.useState([]);
+  const [customConfig,setCustomConfig] = React.useState({});
 
   React.useEffect(() => {
     const configCache =  localStorage.getItem(service);
     if(configCache)
     {
-      setUserConfig(JSON.parse(configCache));
+      setUserConfig(JSON.parse(configCache).userConfig);
+      setCustomConfig(JSON.parse(configCache).customConfig);
     }
     else{
       setUserConfig(getConfiguration(service));
     }
     return () => {
       setUserConfig(null);
-      setNewTextField([]);
+      setCustomConfig({});
     };
   },[service]);
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
-      localStorage.setItem(service, JSON.stringify(userConfig));
+      const userConfigCache  = {
+        'userConfig':userConfig,
+        'customConfig':customConfig
+      };
+      localStorage.setItem(service, JSON.stringify(userConfigCache));
     }, 1000);
     return () => clearTimeout(timer);
-  }, [userConfig]);
+  }, [userConfig,customConfig]);
 
-  const handleUserConfig = (newUserConfig)=>{
-    setUserConfig(newUserConfig);
+  const handleCustomConfig = (key,newConfig)=>{
+    setCustomConfig({...customConfig,[key]:newConfig});
   };
    
   const onAddBtnClick = () => {
-    setNewTextField(newTextField.concat(<CustomTextField userConfig = {userConfig} handleUserConfig={handleUserConfig} setNewTextField = {setNewTextField}/>));
+    setCustomConfig({...customConfig,[Object.keys(customConfig).length]:['','']});
+  };
+
+  const handleReset = ()=>{
+    localStorage.removeItem(service);
+    setUserConfig(getConfiguration(service));
+    setCustomConfig({});
   };
 
   return userConfig ?(
@@ -66,11 +77,12 @@ export default function Configuration({service}){
             <p>CUSTOM CONFIGURATION</p>
             <AddCircleOutlineIcon data-testid="add-new-config" color='blue' onClick={onAddBtnClick}/>
           </div>
-          {newTextField}
+          {Object.keys(customConfig).map((configuration,index)=>(
+            <CustomTextField Key = {configuration} customConfig={customConfig[configuration]} handleCustomConfig={handleCustomConfig}  key={index}/>
+          ))}
         </Box>
-        <div className='generate-btn-container'>
-          <Button className='config-btn-color'>GENERATE NOW</Button>
-        </div>
+        <Button  data-testid="reset-button" className='config-btn-color' onClick={()=>{handleReset();}}>RESET</Button>
+        <Button className='config-btn-color'>GENERATE NOW</Button>
       </div>
     </div>
   ) : (
