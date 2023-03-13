@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import { Route, Routes, Link } from 'react-router-dom';
-import {Home, About} from './components';
-import { MainDashboard, SignUpPage } from './pages';
 import { Button } from '@mui/material';
+import {Home, About} from './components';
+import { MainDashboard,ConfigurationPage, SignUpPage } from './pages';
 import {
   ReactFlowProvider,
 } from 'reactflow';
@@ -18,10 +18,14 @@ function App() {
           <Link to='/about'><Button variant='contained'>About</Button></Link>
         </div>
       </div>}></Route>
+      
+      {/* <Route path='/' element={<Header />}></Route>  */}
       <Route path='/home' element={<Home />}></Route> 
       <Route path='/signup' element={<SignUpPage/>}></Route>
       <Route path='/about' element={<About />}></Route>
       <Route path='/dashboard' element={<ReactFlowProvider><MainDashboard /></ReactFlowProvider>}></Route>
+      {/* <Route path='/' element={<Footer />}></Route>  */}
+      <Route path = '/configuration' element = {<ConfigurationPage/>}></Route>
     </Routes>
   );
 }
