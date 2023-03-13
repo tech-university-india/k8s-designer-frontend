@@ -6,6 +6,7 @@ import * as ResizeObserverModule from 'resize-observer-polyfill';
 
 (global).ResizeObserver = ResizeObserverModule.default;
 
+jest.mock('reactflow/dist/style.css', () => {});
 describe('MainDashboard', () => {
   it('should render correctly', () => {
     const { asFragment } = render(<MainDashboard />);

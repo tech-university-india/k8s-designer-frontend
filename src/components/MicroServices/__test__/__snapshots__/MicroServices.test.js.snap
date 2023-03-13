@@ -5,13 +5,10 @@ exports[`MicroServices should render correctly 1`] = `
   <div
     class="microservices"
   >
-    <div>
-      <p
-        class="heading"
-      >
-        MicroServices
-      </p>
-      <hr />
+    <div
+      class="microservices-header"
+    >
+      MICROSERVICES
     </div>
     <div
       class="services"

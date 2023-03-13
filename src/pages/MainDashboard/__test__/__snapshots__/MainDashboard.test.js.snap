@@ -3,7 +3,7 @@
 exports[`MainDashboard should render correctly 1`] = `
 <DocumentFragment>
   <div
-    class="maindashboard"
+    class="main-dashboard"
   >
     <div
       class="header"
@@ -44,18 +44,15 @@ exports[`MainDashboard should render correctly 1`] = `
       </div>
     </div>
     <div
-      class="dashboard_service"
+      class="dashboard-service"
     >
       <div
         class="microservices"
       >
-        <div>
-          <p
-            class="heading"
-          >
-            MicroServices
-          </p>
-          <hr />
+        <div
+          class="microservices-header"
+        >
+          MICROSERVICES
         </div>
         <div
           class="services"
@@ -182,6 +179,15 @@ exports[`MainDashboard should render correctly 1`] = `
           id="react-flow__aria-live-1"
           style="position: absolute; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(100%);"
         />
+      </div>
+      <div
+        class="config-body"
+      >
+        <div
+          class="config-element-border"
+        >
+          CONFIGURATION
+        </div>
       </div>
     </div>
   </div>
