@@ -9,10 +9,7 @@ const MicroServices = () => {
   };
   return (
     <div className='microservices'>
-      <div>
-        <p className='heading'>MicroServices</p>
-        <hr />
-      </div>
+      <div className='microservices-header'>MICROSERVICES</div>
       <div className='services'>
         <div draggable onDragStart={(event) => onDragStart(event, 'frontend', 'microservice')} className='service'>
           <p>FRONTEND</p>
