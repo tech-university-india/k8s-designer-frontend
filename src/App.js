@@ -3,7 +3,7 @@ import './App.css';
 import { Route, Routes, Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import {Home, About} from './components';
-import { MainDashboard,ConfigurationPage } from './pages';
+import { MainDashboard,ConfigurationPage, SignUpPage } from './pages';
 import {
   ReactFlowProvider,
 } from 'reactflow';
@@ -21,6 +21,7 @@ function App() {
       
       {/* <Route path='/' element={<Header />}></Route>  */}
       <Route path='/home' element={<Home />}></Route> 
+      <Route path='/signup' element={<SignUpPage/>}></Route>
       <Route path='/about' element={<About />}></Route>
       <Route path='/dashboard' element={<ReactFlowProvider><MainDashboard /></ReactFlowProvider>}></Route>
       {/* <Route path='/' element={<Footer />}></Route>  */}

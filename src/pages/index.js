@@ -1,3 +1,5 @@
 export { default as ConfigurationPage} from './ConfigurationPage';
 import MainDashboard from './MainDashboard';
-export { MainDashboard };
+import SignUpPage from './SignUpPage';
+
+export { MainDashboard, SignUpPage };
