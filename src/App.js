@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Route, Routes, Link } from 'react-router-dom';
 import {Home, About} from './components';
-import { MainDashboard } from './pages';
+import { MainDashboard, SignUpPage } from './pages';
 import { Button } from '@mui/material';
 import {
   ReactFlowProvider,
@@ -19,6 +19,7 @@ function App() {
         </div>
       </div>}></Route>
       <Route path='/home' element={<Home />}></Route> 
+      <Route path='/signup' element={<SignUpPage/>}></Route>
       <Route path='/about' element={<About />}></Route>
       <Route path='/dashboard' element={<ReactFlowProvider><MainDashboard /></ReactFlowProvider>}></Route>
     </Routes>
