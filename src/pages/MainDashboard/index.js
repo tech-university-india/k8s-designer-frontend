@@ -23,6 +23,10 @@ const MainDashboard = () => {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [service,setService] = React.useState();
 
+  const onNodeClick = useCallback((event, node) => {
+    setService(node.data.label);
+  }, []);
+
   const onConnect = useCallback((params) => setEdges((eds) => addEdge({ ...params, type: 'microserice' }, eds)), []);
 
   const onDragOver = useCallback((event) => {
@@ -60,15 +64,16 @@ const MainDashboard = () => {
     [reactFlowInstance]
   );
   return (
-    <div className='maindashboard'>
+    <div className='main-dashboard'>
       <Header />
-      <div className='dashboard_service' ref={reactFlowWrapper}>
+      <div className='dashboard-service' ref={reactFlowWrapper}>
         <MicroServices />
         <ReactFlow
           nodes={nodes}
           edges={edges}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
+          onNodeClick={onNodeClick}
           onConnect={onConnect}
           nodeTypes={nodeTypes}
           onInit={setReactFlowInstance}
