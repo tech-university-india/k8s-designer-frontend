@@ -8,7 +8,8 @@ import ReactFlow, {
   useEdgesState,
   Background,
 } from 'reactflow';
-import 'reactflow/dist/style.css';
+
+// import 'reactflow/dist/style.css';
 import { CustomNode } from '../../utils';
 
 const nodeTypes = {
